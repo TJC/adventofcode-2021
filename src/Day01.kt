@@ -8,14 +8,8 @@ fun main() {
     fun part2(input: List<Int>): Int {
         val offset1 = input.subList(1, input.size)
         val offset2 = input.subList(2, input.size)
-        val trips = input.zip(offset1).zip(offset2)
-        val sums = trips.map {
-            val i = it.first.first
-            val j = it.first.second
-            val k = it.second
-            i+j+k
-        }
-        val combined = sums.zip(sums.subList(1, sums.size))
+        val trips = input.zip(offset1).map { (i,j) -> i+j }.zip(offset2).map { (i,j) -> i+j }
+        val combined = trips.zip(trips.subList(1, trips.size))
         return combined.filter { (a,b) -> b > a }.size
     }
 
